@@ -18,6 +18,8 @@ def create_app():
         os.makedirs(db_dir, exist_ok=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_path}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    _ensure_columns(db_path, 'products', {'created_at': 'DATETIME', 'updated_at': 'DATETIME'})
+
     from .models import db
     db.init_app(app)
 
@@ -25,3 +27,43 @@ def create_app():
     from .routes import bp as routes_bp
     app.register_blueprint(routes_bp)
     return app
+
+import sqlite3
+
+
+def _ensure_columns(sqlite_path, table, columns):
+    """Ensure the given columns exist on the SQLite table; add them if missing.
+
+
+    This updates the SQLite file in-place (no backup) as requested.
+    """
+    if not os.path.exists(sqlite_path):
+        return
+    conn = sqlite3.connect(sqlite_path)
+    cur = conn.cursor()
+    try:
+        cur.execute(f"PRAGMA table_info('{table}')")
+        existing = {row[1] for row in cur.fetchall()}  # row[1] is column name
+        for col, col_type in columns.items():
+            if col not in existing:
+                stmt = f"ALTER TABLE {table} ADD COLUMN {col} {col_type};"
+                try:
+                    cur.execute(stmt)
+                except Exception:
+                    # ignore errors to keep startup resilient
+                    pass
+        # After adding missing columns, ensure existing rows do not have NULL timestamps
+        # Use SQLite CURRENT_TIMESTAMP to set current date/time for NULL values
+        try:
+            if 'created_at' in columns:
+                cur.execute(f"UPDATE {table} SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL;")
+            if 'updated_at' in columns:
+                cur.execute(f"UPDATE {table} SET updated_at = CURRENT_TIMESTAMP WHERE updated_at IS NULL;")
+        except Exception:
+            # ignore update errors; keep startup resilient
+            pass
+        conn.commit()
+    finally:
+        cur.close()
+        conn.close()
+

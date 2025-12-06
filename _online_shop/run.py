@@ -1,5 +1,5 @@
 from app import create_app
-from _online_shop.app.models import db
+from app.models import db
 from flask import Flask
 import os
 app=create_app()
