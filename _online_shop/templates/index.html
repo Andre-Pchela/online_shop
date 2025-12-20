@@ -9,7 +9,7 @@
     <a href="{{ url_for('routes.add_product') }}">Add Product</a>
     <table border="1">
         <tr></th>ID</th>Name</th><th>Price</th><th>Created</th><th>Updated</th><th>Stock</th><th>Is_active_</th><th>Category</th><th>Rating</th><th>Sale</th></tr>
-        {% for product in poducts %}
+        {% for product in products %}
         <tr>
             <td>{{product.id}}</td>
             <td>{{product.name}}</td>
