@@ -5,37 +5,36 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="form">
    <h1>{{action}} Product</h1>
    <form method="post">
     <label>Name:
     <input type="text" name="name" value="{{product.name if product else''}}"required>    
     </label><br>
     <label>Prise:
-    <input type="number" name="prise" value="{{product.name if product else''}}"required>    
+    <input type="number" name="prise" value="{{product.prise if product else'0'}}"required>      
     </label><br>
-    <label>created_:
-    <input type="text" name="created_" value="{{product.name if product else''}}">    
-    </label><br>
-    <label>updated_at:
-    <input type="text" name="updated_at" value="{{product.name if product else''}}">    
-    </label><br>
+    <label>is_active:
+    <input type="checkbox" name="is_active" value="{{product.is_active if product else 'False'}}">    
+    </label><br>    
     <label>stock:
-    <input type="text" name="stock" value="{{product.name if product else''}}">    
+    <input type="number" name="stock" value="{{product.stock if product else'0'}}">    
     </label><br>
-    <label>is_active_:
-    <input type="text" name="is_active_" value="{{product.name if product else''}}">    
-    </label><br>
+    <label>description:
+    <input type="text" name="description" value="{{product.description if product else''}}">
+    </label></br>
     <label>category:
-    <input type="text" name="category" value="{{product.name if product else''}}">    
+    <input type="text" name="category" value="{{product.category if product else''}}">    
     </label><br>
     <label>rating:
-    <input type="text" name="rating" value="{{product.name if product else''}}">    
+    <input type="number" name="rating" value="{{product.rating if product else'0'}}" min="0" max="5">    
     </label><br>
     <label>sale:
-    <input type="text" name="sale" value="{{product.name if product else''}}">    
+    <input type="checkbox" name="sale" value="{{product.saale if product else'False'}}">    
     </label><br>
     <button type="submit">{{action}}</button>
    </form>
    <a href="{{ url_for('routes.products') }}">back</a>
+   </div>
 </body>
 </html>

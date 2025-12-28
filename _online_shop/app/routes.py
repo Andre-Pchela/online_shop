@@ -17,7 +17,13 @@ def add_product():
     if request.method =='POST':
         name=request.form['name']
         prise=request.form['prise']
-        product=Product(name=name, prise=float(prise))
+        description=request.form['description']
+        stock=request.form['stock']        
+        is_active=request.form.get('is_active')
+        category=request.form['category']  
+        rating=request.form['rating']  
+        sale=request.form.get('sale')  
+        product=Product(name=name, prise=float(prise), description=description, stock=int(stock), is_active=bool(is_active), category=category, rating=float(rating), sale=bool(sale))
         db.session.add(product)
         db.session.commit()
         #flash("Product added")
