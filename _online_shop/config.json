@@ -1,5 +1,5 @@
 {
     "DB_PATH" :"db/shop.db",
-    "SECRET_CAGE":"pasword"
+    "SECRET_Key":"pasword"
 
 }
