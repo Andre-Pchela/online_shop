@@ -10,7 +10,7 @@ def index():
 @bp.route('/products')
 def products():
     products = Product.query.all()
-    return render_template('index.html', products=products)
+    return render_template('products.html', products=products)
 
 @bp.route('/add', methods=['GET','POST'])
 def add_product():
