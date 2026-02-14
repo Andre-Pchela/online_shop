@@ -1,1 +1,2 @@
 onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/default.png') }}'">
+modal
