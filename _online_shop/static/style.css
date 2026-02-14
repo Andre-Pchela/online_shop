@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(135deg, #e6f7f2 0%, #f5fbff 100%);
+  background: linear-gradient(135deg, #ddd162 0%, #f5fbff 100%);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #072a40;
   margin: 0;
@@ -50,7 +50,7 @@ h1 {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
-  background: #f0f4f8;
+  background: #116eca;
 }
 .product-name {
   font-size: 1.05rem;
@@ -71,7 +71,7 @@ h1 {
 .btn {
   display: inline-block;
   padding: 6px 10px;
-  background: #2a9d8f;
+  background: #250d68;
   color: white;
   border-radius: 8px;
   text-decoration: none;
@@ -128,7 +128,7 @@ h1 {
   background: transparent;
   border: none;
   font-size: 28px;
-  color: #334;
+  color: rgb(33, 33, 197);
   cursor: pointer;
 }
 .modal-body {
@@ -144,7 +144,7 @@ h1 {
   object-fit: contain; /* show whole image without cropping */
   object-position: center center;
   border-radius: 8px;
-  background: #f0f4f8;
+  background: #2562a0;
   flex-shrink: 0;
 }
 
@@ -169,13 +169,13 @@ h1 {
   color: #223;
 }
 .meta {
-  color: #667;
+  color: rgb(50, 50, 156);
   margin-top: 8px;
 }
 
 
 .btn-details {
-  background: #0b7285;
+  background: #4c3b7c;
 }
 
 
