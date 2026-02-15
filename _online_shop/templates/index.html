@@ -11,13 +11,25 @@
         </div>
         <div class="products">
             {% for product in products%}
-            <div class="card">
+            <div class="image-wrapper">
                <img src="{{ url_for('static', filename='image/' ~ product.name ~ '.png') }}"
                     alt="{{ product.name }}"
-                    >
-
+                    onerror="this.onerror=null; this.src='{{ url_for('static', filename='image/default.png')}}'">
+                {%if product.sale %}
+                <img class="sale-icon"
+                     src="{{url_for('static', filename='image/sale.png')}}"
+                     alt="Sale"/>
+                {% endif %}
+            
                 <h2 class="product-name">{{product.name}}</h2>
                 <p class="product-feature">Price: ${{'%.2f'| format(product.prise)}}</p>
+                <div class="rating" data-rating="{{product.rating}}">
+                    <span class="star">*</span>
+                    <span class="star">*</span>
+                    <span class="star">*</span>
+                    <span class="star">*</span>
+                    <span class="star">*</span>
+                </div>
                 <div class="card-actions">
                     <button class="btn btn-details"
                     data-name="{{ product.name|e}}"
@@ -32,7 +44,7 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
+        
             <div id="product-modal" class="modal" aria-hidden="true">
             <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-name">
                 <button class="modal-close" aria-label="Close">&times;</button>
@@ -50,4 +62,5 @@
             </div>
         </div>
         <script src="{{ url_for('static', filename='modal.js') }}"></script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
 </html>
